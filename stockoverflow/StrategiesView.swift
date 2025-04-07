@@ -9,7 +9,16 @@ import SwiftUI
 
 struct StrategiesView: View {
     var body: some View {
-        Text("StrategiesView")
+        VStack {
+            TopNavView(title: "Strategies")
+            List {
+                Text("Strategy 1")
+                
+                Button("New Strategy",
+                       systemImage: "plus.circle.fill",
+                       action: {})
+            }
+        }
     }
 }
 

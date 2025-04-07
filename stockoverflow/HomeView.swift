@@ -9,7 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
+        VStack {
+            TopNavView(title: "Home")
+        }
         Text("HomeView")
+        Spacer()
     }
 }
 
