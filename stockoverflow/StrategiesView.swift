@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StrategiesView: View {
+    @State private var editViewIsPresented: Bool = false
     var body: some View {
         VStack {
             TopNavView(title: "Strategies")
@@ -16,9 +17,15 @@ struct StrategiesView: View {
                 
                 Button("New Strategy",
                        systemImage: "plus.circle.fill",
-                       action: {})
+                       action: {
+                    editViewIsPresented.toggle()
+                })
+                .sheet(isPresented: $editViewIsPresented) {
+                    EditStrategyView()
+                }
             }
         }
+        
     }
 }
 
