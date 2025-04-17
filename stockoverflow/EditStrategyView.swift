@@ -9,9 +9,16 @@ import SwiftUI
 
 struct EditStrategyView: View {
     @State var strategyName: String = ""
+    @State var showingViewType: CategoryType? = nil
+    
     
     @Environment(\.dismiss) private var dismiss
     //    @Environment(\.modelContext) var context
+    enum CategoryType: String, CaseIterable {
+        case 基本 = "基本面"
+        case 技術 = "技術面"
+        case 籌碼 = "籌碼面"
+    }
     
     var body: some View {
         NavigationStack {
@@ -21,12 +28,22 @@ struct EditStrategyView: View {
                     .frame(height: 50)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
-                CategoryCardView(categoryName: "基本面", color: .orange, onClick: {})
-                CategoryCardView(categoryName: "技術面", color: .pink, onClick: {})
-                CategoryCardView(categoryName: "籌碼面", color: .red, onClick: {})
-                Spacer()
+                    .padding()
+                List {
+                    ForEach(CategoryType.allCases, id: \.self) { category in
+                        
+                        NavigationLink {
+                            Text(category.rawValue)
+                        } label: {
+                            Text(category.rawValue)
+//                            CategoryCardView(categoryName: category.rawValue,
+//                                             color: .orange, onClick: {})
+                        }
+                    }
+                }
+                .listStyle(.plain)
             }
-            .padding()
+            
             .navigationTitle("新增策略")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
