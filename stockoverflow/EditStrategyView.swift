@@ -15,10 +15,39 @@ struct EditStrategyView: View {
     @Environment(\.dismiss) private var dismiss
     //    @Environment(\.modelContext) var context
     enum CategoryType: String, CaseIterable {
-        case 基本 = "基本面"
-        case 技術 = "技術面"
-        case 籌碼 = "籌碼面"
+        case fundamental = "基本面"
+        case technical = "技術面"
+        case chip = "籌碼面"
+        
+//        var editView: any View {
+//            switch self {
+//            case .fundamental:
+//                
+//            }
+//        }
+            
     }
+    
+    @State private var fundamentalCategory = FundamentalCategory(
+        peRatioCompareType: .lessThan,
+            peRatioMax: 100,
+            peRatioMin: nil,
+            pbRatioCompareType: .none,
+            pbRatioMax: nil,
+            pbRatioMin: nil,
+            dividendYieldCompareType: .none,
+            dividendYieldMax: nil,
+            dividendYieldMin: nil,
+            monthlyRevenueMoMCompareType: .none,
+            monthlyRevenueMoMMax: nil,
+            monthlyRevenueMoMMin: nil,
+            monthlyRevenueYoYCompareType: .none,
+            monthlyRevenueYoYMax: nil,
+            monthlyRevenueYoYMin: nil,
+            cumulativeRevenueYoYCompareType: .none,
+            cumulativeRevenueYoYMax: nil,
+            cumulativeRevenueYoYMin: nil
+        )
     
     var body: some View {
         NavigationStack {
@@ -33,9 +62,10 @@ struct EditStrategyView: View {
                     ForEach(CategoryType.allCases, id: \.self) { category in
                         
                         NavigationLink {
-                            Text(category.rawValue)
+                            FundamentalCategoryView(category: $fundamentalCategory)
                         } label: {
                             Text(category.rawValue)
+                            
 //                            CategoryCardView(categoryName: category.rawValue,
 //                                             color: .orange, onClick: {})
                         }
